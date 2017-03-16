@@ -33,7 +33,7 @@ License
 
 References
 ------------
-1. VPCD from [vsmartcard] (https://github.com/bondhan/vsmartcard)
+1. VPCD from [vsmartcard] (https://github.com/bondhan/vsmartcard) or you can install from Driver\Debug on this repository and see Install.md for more information
 2. [UMDF Virtual Smart Card Reader] (https://www.codeproject.com/articles/134010/an-umdf-driver-for-a-virtual-smart-card-reader)
 3. JCOP Tool proprietary of NXP
 4. Qt 5.5
