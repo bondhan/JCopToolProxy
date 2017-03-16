@@ -3,9 +3,9 @@ Introduction
 
 This a simple application which connect the virtual smart card reader (VPCD) with JCOP Tool.
 
-Virtual Smart Card Architecture Virtual PCD 2 	<==> JCopToolProxy <==> 	JCOP Tool
+	Virtual Smart Card Architecture Virtual PCD 2 	<==> JCopToolProxy <==> 	JCOP Tool
 
-			(localhost:35963)	<==> JCopToolProxy <==> 	(localhost:8050)
+				(localhost:35963)	<==> JCopToolProxy <==> 	(localhost:8050)
 
 It is written based on the log file of TCP/IP trace.
 
