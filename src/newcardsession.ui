@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>NewCardSession</class>
+ <widget class="QWidget" name="NewCardSession">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>639</width>
+    <height>399</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Card Session</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="mainVerticalLayout">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1,0,1,0,0,0">
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Card ReaderPort:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="VirtualCardReaderPortLineEdit">
+         <property name="toolTip">
+          <string>Port Number of the virtual card reader</string>
+         </property>
+         <property name="text">
+          <string>35963</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>JCopTool Port:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="JCopPortLineEdit">
+         <property name="toolTip">
+          <string>JCOP port number</string>
+         </property>
+         <property name="text">
+          <string>8050</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="connectPushButton">
+         <property name="text">
+          <string>Connect</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="autoConnectCheckBox">
+         <property name="toolTip">
+          <string>Wait for the JCOP port to be ready automatically</string>
+         </property>
+         <property name="text">
+          <string>Auto</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="clearPushButton">
+         <property name="text">
+          <string>Clear</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="OutputTextEdit"/>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
