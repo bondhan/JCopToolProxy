@@ -20,7 +20,7 @@ Please check in the log folder
 
 Installation
 ------------
-- [Install] the VPCD (https://bono02.wordpress.com/2017/02/28/install-bixvreader-on-windows-10/)
+- [Install] the VPCD (http://frankmorgner.github.io/vsmartcard/virtualsmartcard/README.html)
 - Run the JCop Tool with port setting is 8050 and send /close command
 - Dowload from the JCTP_Deliverables and Run the JCopToolProxy, click connect, you can File->Hide to hide it in system tray
 
