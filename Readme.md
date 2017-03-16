@@ -20,7 +20,7 @@ Please check in the log folder
 
 Installation
 ------------
-- [Install] the VPCD (http://frankmorgner.github.io/vsmartcard/virtualsmartcard/README.html) or you can install from Driver\Debug on this repository and see Install.md for more information
+- Install the [VPCD](http://frankmorgner.github.io/vsmartcard/virtualsmartcard/README.html) or you can install from Driver\Debug on this repository and see Install.md for more information
 - Run the JCop Tool with port setting is 8050 and send /close command
 - Dowload from the JCTP_Deliverables and Run the JCopToolProxy, click connect, you can File->Hide to hide it in system tray
 
@@ -33,7 +33,7 @@ License
 
 References
 ------------
-1. VPCD from [vsmartcard] ((http://frankmorgner.github.io/vsmartcard/)
-2. [UMDF Virtual Smart Card Reader] (https://www.codeproject.com/articles/134010/an-umdf-driver-for-a-virtual-smart-card-reader)
+1. VPCD from [vsmartcard](http://frankmorgner.github.io/vsmartcard/)
+2. [UMDF Virtual Smart Card Reader](https://www.codeproject.com/articles/134010/an-umdf-driver-for-a-virtual-smart-card-reader)
 3. JCOP Tool proprietary of NXP
 4. Qt 5.5
