@@ -7,13 +7,15 @@ TARGET = JCopToolProxy
 HEADERS       = mainwindow.h \
                 mdichild.h \
                 newcardsession.h \
-    statuswidget.h
+    statuswidget.h \
+    simplepcscmanager.h
 
 SOURCES       = main.cpp \
                 mainwindow.cpp \
                 mdichild.cpp \
                 newcardsession.cpp \
-    statuswidget.cpp
+    statuswidget.cpp \
+    simplepcscmanager.cpp
 
 #DEFINES += SHOW_DEBUG
 

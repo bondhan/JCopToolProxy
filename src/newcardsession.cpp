@@ -8,11 +8,14 @@
 #include <QBuffer>
 #include <QDateTime>
 
+
 NewCardSession::NewCardSession(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::NewCardSession)
 {
     ui->setupUi(this);
+
+    populateCardReaders();
 
     setAttribute(Qt::WA_DeleteOnClose);
 
@@ -22,6 +25,11 @@ NewCardSession::NewCardSession(QWidget *parent) :
     isVCRConnected = false;
 
     was000102 = false;
+
+    str001000A404000BA0000003974349445F0100 = 0;
+    str000500CA7F6800 = 0;
+    str000E00A4040009A00000030800001000 = 0;
+    str000E00A4040009A00000039742544659 = 0;
 
     tcpSocketJCop = new QTcpSocket();
     tcpSocketVCR = new QTcpSocket();
@@ -329,7 +337,60 @@ void NewCardSession::doVCRRead()
 
     _blockSizeVCR= 0;
 
-    doWriteOutput("VCR -> PC: " + msg +"\n");
+    if (msg != "000104" || ui->HideTTLCheckBox->isChecked() == false)
+        doWriteOutput("VCR -> PC: " + msg +"\n");
+
+    if (ui->msCheckBox->isChecked())
+    {
+        if (msg == "001000A404000BA0000003974349445F0100")
+        {
+            str001000A404000BA0000003974349445F0100++;
+
+            QString cmd = "00026A82";
+            QByteArray array = QByteArray::fromHex(cmd.toLatin1());
+            tcpSocketVCR->write(array);
+
+            doWriteOutput("VCR -> PC: " + cmd +"\n");
+
+            return;
+        }
+        if (msg == "000500CA7F6800")
+        {
+            str000500CA7F6800++;
+
+            QString cmd = "00026A88";
+            QByteArray array = QByteArray::fromHex(cmd.toLatin1());
+            tcpSocketVCR->write(array);
+
+            doWriteOutput("VCR -> PC: " + cmd +"\n");
+
+            return;
+        }
+        if (msg == "000E00A4040009A00000030800001000")
+        {
+            str000E00A4040009A00000030800001000++;
+
+            QString cmd = "00026A82";
+            QByteArray array = QByteArray::fromHex(cmd.toLatin1());
+            tcpSocketVCR->write(array);
+
+            doWriteOutput("VCR -> PC: " + cmd +"\n");
+
+            return;
+        }
+        if (msg == "000E00A4040009A00000039742544659")
+        {
+            str000E00A4040009A00000039742544659++;
+
+            QString cmd = "00026A82";
+            QByteArray array = QByteArray::fromHex(cmd.toLatin1());
+            tcpSocketVCR->write(array);
+
+            doWriteOutput("VCR -> PC: " + cmd +"\n");
+
+            return;
+        }
+    }
 
     if (msg == "000104")
     {
@@ -350,7 +411,8 @@ void NewCardSession::doVCRRead()
             QByteArray array = QByteArray::fromHex(packet.toLatin1());
             tcpSocketVCR->write(array);
 
-            doWriteOutput("PC -> VCR: "+ array.toHex().toUpper() +"\n");
+            if (ui->HideTTLCheckBox->isChecked() == false)
+                doWriteOutput("PC -> VCR: "+ array.toHex().toUpper() +"\n");
         }
 
     }
@@ -386,7 +448,6 @@ void NewCardSession::doVCRRead()
         tcpSocketJCop->write(array);
 
         doWriteOutput("PC -> JCP: "+ array.toHex().toUpper() +"\n");
-
     }
 
 }
@@ -599,3 +660,53 @@ QString NewCardSession::strippedName(const QString &fullFileName)
 {
     return curFile;
 }
+
+void NewCardSession::populateCardReaders()
+{
+    QString status_message;
+    SCARDCONTEXT hSc;
+    DWORD SCOPE = SCARD_SCOPE_SYSTEM;
+    QStringList readerList;
+    DWORD ActiveProtocol;
+    SCARDHANDLE hCard;
+    BYTE *iSsimulated;
+
+    SimplePCSCManager *cm = new SimplePCSCManager();
+    if (cm->EstablishContext(&status_message, &hSc, SCOPE) != SCARD_S_SUCCESS)
+    {
+        QMessageBox::warning(this, tr("JCopTool Proxy"),
+                             tr("%1").arg(status_message));
+        status_message.clear();
+    }
+
+    ui->readerComboBox->clear();
+
+    cm->ListReaders(&status_message, hSc, &readerList);
+    int counter = 0;
+    foreach(const QString &reader, readerList)
+    {
+        bool isConnected = cm->Connect(reader, hSc, SCARD_SHARE_DIRECT, SCARD_PROTOCOL_UNDEFINED, &ActiveProtocol, &hCard);
+
+        iSsimulated = cm->GetAttrib(&status_message, 0x7a009, hCard);
+
+        if (iSsimulated != NULL)
+        {
+            counter++;
+            if (counter < 3)
+                continue;
+            ui->readerComboBox->addItem(reader);
+            doWriteOutput("NOT NULL: " + status_message);
+        }
+        else
+            doWriteOutput("NULL: " + status_message);
+    }
+
+    if (cm->ReleaseContext(&status_message, hSc)  != SCARD_S_SUCCESS)
+    {
+        QMessageBox::warning(this, tr("JCopTool Proxy"),
+                             tr("%1").arg(status_message));
+        status_message.clear();
+    }
+
+}
+

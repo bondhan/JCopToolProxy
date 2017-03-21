@@ -6,6 +6,8 @@
 #include <QTcpSocket>
 #include <QCloseEvent>
 #include <QTextEdit>
+#include"simplepcscmanager.h"
+#include <QMutex>
 
 #define TIMER_INTERVAL      100
 
@@ -42,6 +44,11 @@ private:
     QByteArray arrayJCOP;
     QTimer *loadingTimer;
 
+    int str001000A404000BA0000003974349445F0100;
+    int str000500CA7F6800;
+    int str000E00A4040009A00000030800001000;
+    int str000E00A4040009A00000039742544659;
+
 protected:
     void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
 
@@ -66,6 +73,8 @@ private slots:
     void on_autoConnectCheckBox_clicked();
 
     QString strippedName(const QString &fullFileName);
+
+    void populateCardReaders();
 
 signals:
     void copyAvailable(bool);

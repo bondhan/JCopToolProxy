@@ -84,9 +84,7 @@ MainWindow::MainWindow()
 
     tray->setVisible(true);
 
-    NewCardSession *child = createNewCardSessionChild();
-    child->showMaximized();
-    child->setAutoChecked(true);
+    NewCardSession *child = createNewCardSessionChild();    
 }
 
 
